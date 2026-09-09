@@ -496,6 +496,9 @@
   #confirmBody{white-space:pre-line;}
 
   footer{margin-top:22px;text-align:center;font-size:11.5px;color:var(--encre-faible);}
+  .page-contact{margin-top:32px;padding-top:18px;border-top:1px dashed var(--ligne);}
+  .page-contact a{color:var(--encre-douce);font-weight:600;text-decoration:underline;}
+  .page-contact a:hover{color:var(--tampon);}
 
   @media print{
     header,.form-col,.premium-card,.preview-toolbar,footer,.pad-frame::before,.pad-tag,#toasts{display:none !important;}
@@ -705,6 +708,10 @@
       <footer>Plan gratuit : 3 PDF par jour, sans compte, sans envoi de données. Ne remplace pas les conseils d'un expert-comptable — vérifiez les mentions obligatoires liées à votre statut.</footer>
     </div>
   </main>
+
+  <footer class="page-contact">
+    Une question, une remarque, un bug&nbsp;? <a href="mailto:lucaschretien@outlook.fr">lucaschretien@outlook.fr</a>
+  </footer>
 
   <!-- ===================== LICENCE MODAL ===================== -->
   <div class="modal-overlay" id="licenseModal" hidden>
