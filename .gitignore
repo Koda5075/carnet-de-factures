@@ -1,0 +1,6 @@
+# Outil local de génération de clés Premium — contient la clé PRIVÉE de
+# signature des licences. Ne JAMAIS committer ni déployer.
+outils-cles.html
+*.pem
+*.der
+*CLE-PRIVEE*
