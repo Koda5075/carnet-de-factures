@@ -4,8 +4,8 @@ Générateur gratuit de devis/factures pour indépendants et micro-entrepreneurs
 français. Actuellement un **site statique à page unique**, sans backend, sans
 build step.
 
-> Le fichier applicatif est `index_1.html` (c'est lui qui est déployé). Les
-> instructions parlent parfois de « index.html » — c'est le même fichier.
+> Le fichier applicatif est `index.html` (renommé depuis `index_1.html` pour
+> que Vercel le serve à la racine). C'est le seul fichier livré.
 
 ## Contexte produit
 
@@ -30,7 +30,7 @@ build step.
 
 ## Stack technique
 
-- Un seul fichier `index_1.html` : HTML + CSS + JS vanilla, pas de framework,
+- Un seul fichier `index.html` : HTML + CSS + JS vanilla, pas de framework,
   pas de bundler.
 - Dépendances externes chargées en CDN (`html2canvas` 1.4.1 et `jspdf` 2.5.1,
   UMD, depuis cdnjs) — export PDF fait en rendant le nœud `#docPage` en canvas
@@ -51,14 +51,26 @@ build step.
 - Bascule Facture / Devis avec numérotation automatique (préfixe FA-/DV-, année,
   compteur local qui s'incrémente réellement à la 1ʳᵉ sauvegarde).
 - Mode micro-entrepreneur : désactive la TVA sur les lignes et ajoute la mention
-  légale automatiquement.
+  légale automatiquement. Même mécanisme (`ensureMention`, sans doublon) pour la
+  mention d'escompte, ajoutée d'office sur toute facture (init + bascule vers
+  Facture).
+- Acompte / paiement partiel : champ optionnel « Acompte déjà versé » sur une
+  facture uniquement ; quand rempli (> 0), l'aperçu ET le PDF affichent Total
+  TTC / Acompte déjà versé / Reste à payer. Vide = aucun changement. Stocké dans
+  `state.acompte`, le brouillon et l'historique.
 - Upload de logo (converti en data URL, affiché dans l'aperçu et le PDF).
 - Aperçu en direct qui reproduit exactement le document exporté.
 - Export PDF (bouton « Télécharger le PDF »), avec quota plan gratuit
   (3 PDF/jour) et filigrane retiré en Premium.
 - Historique des documents (localStorage) avec statut cyclable Brouillon /
-  Envoyée / Payée, ouverture au clic ou au clavier, « Dupliquer », et export CSV.
+  Envoyée / Payée, ouverture au clic ou au clavier, « Dupliquer », export CSV,
+  et « Convertir en facture » sur les lignes de type devis (nouvelle facture,
+  nouveau numéro, dates du jour, sans ressaisie).
 - Clients enregistrés, réutilisables via un menu déroulant.
+- Sauvegarde manuelle : « Exporter mes données » / « Importer mes données » dans
+  le header — un fichier JSON contenant société, clients, historique, compteurs
+  et brouillon (pas la licence ni le quota). Import avec confirmation avant
+  écrasement. C'est le filet de sécurité du tout-localStorage.
 - Brouillon auto-enregistré (`cdf_draft_v1`) restauré au chargement.
 - Toasts de confirmation ; modale de confirmation intégrée pour les actions
   destructives (pas de `confirm()`/`alert()` natifs).
