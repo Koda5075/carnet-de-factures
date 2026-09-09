@@ -1852,7 +1852,7 @@
   // ---- premium / licence ----
   function openPlan(link, label){
     if(link){ window.open(link, '_blank', 'noopener'); }
-    else { toast('Le paiement '+label+' sera bientôt disponible. Écrivez à lucaschretienk@gmail.com en attendant.', 'warn'); }
+    else { toast('Le paiement '+label+' sera bientôt disponible. Écrivez à lucaschretien@outlook.fr en attendant.', 'warn'); }
   }
   el.planMonthly.addEventListener('click', function(e){
     if(!STRIPE_LINK_MONTHLY){ e.preventDefault(); openPlan(null, 'mensuel'); }
